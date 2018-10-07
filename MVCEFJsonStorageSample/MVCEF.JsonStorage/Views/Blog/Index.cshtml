@@ -1,0 +1,61 @@
+﻿@model IEnumerable<MVCEF.JsonStorage.Enity.Blog>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>博客列表</h2>
+
+<p>
+    @Html.ActionLink("创建", "UpInsert", "Blog", null,new {@class="btn btn-primary"})
+</p>
+<table class="table">
+    <tr>
+        <td>Id</td>
+        <th>
+            @Html.DisplayNameFor(model => model.Url)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tags)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Owner)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Owner.Email)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Url)
+        </td>
+        <td>
+            @(item.Tags==null? String.Empty:string.Join(",",item.Tags))
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Owner.Name)
+            @Html.DisplayFor(modelItem => item.Owner.EglishName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Owner.Email)
+        </td>
+        @{ 
+            if(item.Id>0)
+            {
+                <td>
+                    @Html.ActionLink("编辑","Get","Blog",new { id=item.Id},new { @class ="btn btn-primary"})
+                    @Html.ActionLink("删除","Delete","Blog",new { id = item.Id }, new { @class ="btn btn-danger"})
+                </td>
+            }
+        }
+    </tr>
+}
+
+</table>

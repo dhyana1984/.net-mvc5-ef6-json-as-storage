@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace MVCEF.JsonStorage.Enity
 {
+    
     public class Post:BaseEntity
     {
         [Required]
