@@ -83,7 +83,7 @@ namespace MVCEF.JsonStorage.Controllers
      
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> UpInsert(Blog blog)
+        public async Task<ActionResult> UpInsert([Bind(Exclude = "Id")] Blog blog) //忽略Id验证，否则Id为空，验证不通过
         {
             
             if (ModelState.IsValid)
@@ -139,7 +139,7 @@ namespace MVCEF.JsonStorage.Controllers
                     var result = _content.SaveChanges();
                     if(result>0)
                     {
-                        return View("Index");
+                        return RedirectToAction("Index");
                     }
                     return Content("<script type='text/javascript'>alert('删除失败！');location.href='/';</script>");
                 }
